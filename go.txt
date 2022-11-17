@@ -1,0 +1,3 @@
+1.inlining - golang svaki poziv funkcije ne odradi tako sto ode do te funkcije pa se posle vraca, vec prepise tu funkciju u kod i onda samo nastavi da je obradjuje. 
+		Na taj nacin smanjuje vreme izvrsavanja programa i otklanja overhead poziva funkcija
+2.defer - ključna reč koja odlaže izvršavanje naredbe dok se ne završi funkcija u kojoj se nalazi Defer naredba

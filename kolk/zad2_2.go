@@ -2,22 +2,26 @@ package main
 
 import (
 	"fmt"
-	"time"
 )
 
-func display(message string) {
-
-	fmt.Println(message)
-
+func findMin(s []int, c chan int) {
+	min := 110
+	for _, v := range s {
+		if v < min {
+			min = v
+		}
+	}
+	c <- min
 }
 
 func main() {
 
-	// run two different goroutine
-	go display("Process 1")
-	go display("Process 2")
-	go display("Process 3")
-
-	// to sleep main goroutine for 1 sec
-	time.Sleep(time.Second * 1)
+	s := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+	c := make(chan int) // need to create channel
+	go findMin(s[:len(s)/4], c)
+	go findMin(s[5:10], c)
+	go findMin(s[10:15], c)
+	go findMin(s[15:20], c)
+	x, y, z, v := <-c, <-c, <-c, <-c // receive from c
+	fmt.Println(x, y, z, v)
 }
